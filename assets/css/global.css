@@ -5,6 +5,7 @@
 
 .content {
     padding: 1rem;
+    margin: auto auto;
 }
 
 @media screen and (min-width: 992px) {

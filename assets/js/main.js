@@ -1,7 +1,3 @@
-const offset = 0
-const limit = 151
-const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`
-
 const convertPokemon = (pokemon, number) => {
     const firstLetter = pokemon.name[0].toUpperCase()
     const name = pokemon.name.slice(1)
@@ -26,16 +22,6 @@ const convertPokemon = (pokemon, number) => {
 
 const pokemonList = document.getElementById('pokemonList')
 
-fetch(url)
-    .then((res) => res.json())
-    .then((response) => response.results)
-    .then((pokemons) => {
-        for (let i = 0; i < pokemons.length; i++) {
-            const pokemon = pokemons[i]
-            pokemonList.innerHTML += convertPokemon(pokemon,i)
-        }
-    })
-    .catch((error) => {
-        console.error(error)
-        console.log('Requisição falhou!')
-    })
+PokeApi.getPokemons().then((pokemons) => {
+    pokemonList.innerHTML += pokemons.map(convertPokemon).join('')
+})
