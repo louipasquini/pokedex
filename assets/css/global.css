@@ -3,6 +3,11 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+}
+
 .content {
     padding: 1rem;
     margin: auto auto;
