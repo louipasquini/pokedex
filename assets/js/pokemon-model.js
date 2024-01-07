@@ -1,5 +1,6 @@
 class Pokemon {
-    constructor(name,type,types) {
+    constructor(num, name,type,types) {
+        this.num = num
         this.name = name
         this.type = type
         this.types = types

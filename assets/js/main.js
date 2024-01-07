@@ -2,6 +2,11 @@
 //     return pokemonTypes.map((typeSlot) => `<li class="type">${typeSlot.type}</li>`)
 // }
 
+const pokemonList = document.getElementById('pokemonList')
+const loadMoreButton = document.getElementById('loadMoreButton')
+let offset = 0
+let limit = 151
+
 const convertPokemon = (pokemon, number) => {
     number += 1
     number = number.toString()
@@ -21,8 +26,16 @@ const convertPokemon = (pokemon, number) => {
     `
 }
 
-const pokemonList = document.getElementById('pokemonList')
+const loadMore = (offset, limit) => {
+    PokeApi.getPokemons(offset, limit).then((pokemons) => {
+        pokemonList.innerHTML = pokemons.map(convertPokemon).join('')
+    })
+}
 
-PokeApi.getPokemons().then((pokemons) => {
-    pokemonList.innerHTML += pokemons.map(convertPokemon).join('')
+loadMore(offset, limit)
+
+loadMoreButton.addEventListener('click' , () => {
+    limit = limit * 2
+    loadMore(offset, limit)
 })
+
